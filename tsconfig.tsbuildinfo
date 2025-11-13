@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/types.ts","./src/vite-env.d.ts","./src/components/chatlist.tsx","./src/components/chatthread.tsx","./src/components/commentlist.tsx","./src/components/composer.tsx","./src/components/postcard.tsx","./src/data/dataprovider.ts","./src/data/localmemoryprovider.ts","./src/state/appstate.tsx"],"version":"5.9.3"}
