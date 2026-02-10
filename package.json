@@ -10,7 +10,10 @@
   },
   "dependencies": {
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "react-router-dom": "^6.21.1",
+    "axios": "^1.6.5",
+    "socket.io-client": "^4.6.2"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "latest",

@@ -1,44 +1,76 @@
-import type { Thread } from '../types';
-import { useAppState } from '../state/AppState';
+import React from 'react';
+import { Thread } from '../types';
+import { useAuth } from '../context/AuthContext';
 
-export default function ChatList({
-  threads,
-  activeThreadId,
-  onSelect
-}: {
+interface ChatListProps {
   threads: Thread[];
-  activeThreadId: string | null;
-  onSelect: (id: string) => void;
-}) {
-  const { currentUser, usersById } = useAppState();
+  selectedThreadId: string | null;
+  onSelectThread: (threadId: string) => void;
+}
+
+export const ChatList: React.FC<ChatListProps> = ({ threads, selectedThreadId, onSelectThread }) => {
+  const { user } = useAuth();
+
+  const getOtherUser = (thread: Thread) => {
+    return thread.participants?.find(p => p.id !== user?.id);
+  };
+
+  const formatTime = (date: Date) => {
+    const d = new Date(date);
+    const now = new Date();
+    const isToday = d.toDateString() === now.toDateString();
+
+    if (isToday) {
+      return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+    return d.toLocaleDateString();
+  };
 
   return (
     <div className="chat-list">
-      {threads.map(t => {
-        const friendId = t.userIds.find(id => id !== currentUser.id) || currentUser.id;
-        const friend = usersById.get(friendId);
-        const isActive = activeThreadId === t.id;
-        return (
-          <div
-            key={t.id}
-            className={isActive ? 'chat-item active' : 'chat-item'}
-            onClick={() => onSelect(t.id)}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <div className="avatar">{friend?.name?.[0] || '?'}</div>
-              <div>
-                <div><strong>{friend?.name || 'Friend'}</strong></div>
-                <div className="small">
-                  Active {new Date(t.lastMessageAt).toLocaleTimeString()}
-                </div>
-              </div>
-            </div>
-            <span className="badge">Open</span>
+      <div className="chat-list-header">
+        <h2>Messages</h2>
+      </div>
+
+      <div className="chat-list-items">
+        {threads.length === 0 ? (
+          <div className="empty-state">
+            <p>No conversations yet</p>
           </div>
-        );
-      })}
-      {threads.length === 0 && <div className="empty">No conversations yet.</div>}
+        ) : (
+          threads.map((thread) => {
+            const otherUser = getOtherUser(thread);
+            const isSelected = selectedThreadId === thread.id;
+
+            return (
+              <div
+                key={thread.id}
+                className={`chat-list-item ${isSelected ? 'selected' : ''}`}
+                onClick={() => onSelectThread(thread.id)}
+              >
+                <div className="avatar">
+                  {otherUser?.avatar_url ? (
+                    <img src={otherUser.avatar_url} alt={otherUser.name} />
+                  ) : (
+                    <div className="avatar-text">{otherUser?.name?.[0] || '?'}</div>
+                  )}
+                </div>
+
+                <div className="chat-info">
+                  <div className="chat-name">{otherUser?.name || 'Unknown'}</div>
+                  {thread.last_message && (
+                    <div className="chat-preview">{thread.last_message.text}</div>
+                  )}
+                </div>
+
+                {thread.last_message && (
+                  <div className="chat-time">{formatTime(thread.last_message.created_at)}</div>
+                )}
+              </div>
+            );
+          })
+        )}
+      </div>
     </div>
   );
-}
-
+};
