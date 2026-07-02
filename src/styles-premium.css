@@ -1,0 +1,758 @@
+/* ========================================
+   iOS-Level Premium Styles & Animations
+   ======================================== */
+
+/* ========== SMOOTH ANIMATIONS ========== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* ========== BOTTOM SHEET ========== */
+
+.bottom-sheet-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.bottom-sheet {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--panel);
+  border-radius: 24px 24px 0 0;
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.4);
+  padding: 24px;
+  transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+  animation: slideUp 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.bottom-sheet-handle {
+  width: 36px;
+  height: 5px;
+  background: var(--muted);
+  opacity: 0.3;
+  border-radius: 3px;
+  margin: 0 auto 16px;
+}
+
+.bottom-sheet-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.bottom-sheet-content {
+  max-height: calc(80vh - 100px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ========== TOAST NOTIFICATIONS ========== */
+
+.toast {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100px);
+  background: var(--panel);
+  color: var(--text);
+  padding: 14px 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 2000;
+  min-width: 280px;
+  max-width: 90%;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.toast-visible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+.toast-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.toast-message {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.toast-success {
+  border-left: 4px solid var(--success);
+}
+
+.toast-success .toast-icon {
+  color: var(--success);
+}
+
+.toast-error {
+  border-left: 4px solid var(--error);
+}
+
+.toast-error .toast-icon {
+  color: var(--error);
+}
+
+.toast-info {
+  border-left: 4px solid var(--accent);
+}
+
+.toast-info .toast-icon {
+  color: var(--accent);
+}
+
+.toast-warning {
+  border-left: 4px solid #f59e0b;
+}
+
+.toast-warning .toast-icon {
+  color: #f59e0b;
+}
+
+/* ========== SKELETON LOADERS ========== */
+
+.skeleton-post,
+.skeleton-chat-item {
+  animation: fadeIn 0.3s ease;
+}
+
+.skeleton-avatar,
+.skeleton-cover,
+.skeleton-text {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 25%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.05) 75%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
+  border-radius: 8px;
+}
+
+.skeleton-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.skeleton-header {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.skeleton-author {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeleton-name {
+  width: 120px;
+  height: 16px;
+}
+
+.skeleton-time {
+  width: 80px;
+  height: 12px;
+}
+
+.skeleton-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.skeleton-line {
+  height: 14px;
+  width: 100%;
+}
+
+.skeleton-line-short {
+  width: 70%;
+}
+
+.skeleton-book {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  background: rgba(124, 156, 255, 0.05);
+  border-radius: 8px;
+}
+
+.skeleton-cover {
+  width: 60px;
+  height: 90px;
+}
+
+.skeleton-book-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeleton-book-title {
+  width: 150px;
+  height: 16px;
+}
+
+.skeleton-book-author {
+  width: 100px;
+  height: 12px;
+}
+
+/* ========== EMPTY STATES ========== */
+
+.empty-state {
+  text-align: center;
+  padding: 60px 32px;
+  animation: fadeIn 0.5s ease;
+}
+
+.empty-state-icon {
+  font-size: 64px;
+  margin-bottom: 16px;
+  animation: bounce 2s infinite;
+}
+
+.empty-state-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.empty-state-description {
+  font-size: 14px;
+  color: var(--muted);
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.empty-state-action {
+  padding: 12px 24px;
+  background: var(--accent);
+  color: #0b0e14;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.empty-state-action:active {
+  transform: scale(0.95);
+}
+
+/* ========== SWIPEABLE CARDS ========== */
+
+.swipeable-card-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.swipe-action {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.swipe-action-left {
+  left: 0;
+}
+
+.swipe-action-right {
+  right: 0;
+}
+
+.swipeable-card {
+  position: relative;
+  background: var(--card-bg);
+  border-radius: 12px;
+  z-index: 1;
+}
+
+/* ========== ANIMATED BUTTON ========== */
+
+.animated-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.2s cubic-bezier(0.32, 0.72, 0, 1);
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.animated-btn:active:not(.loading):not(.disabled) {
+  transform: scale(0.95);
+}
+
+.animated-btn-small {
+  padding: 8px 16px;
+  font-size: 13px;
+}
+
+.animated-btn-medium {
+  padding: 12px 24px;
+  font-size: 14px;
+}
+
+.animated-btn-large {
+  padding: 16px 32px;
+  font-size: 16px;
+}
+
+.animated-btn-primary {
+  background: var(--accent);
+  color: #0b0e14;
+}
+
+.animated-btn-secondary {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.animated-btn-danger {
+  background: var(--error);
+  color: white;
+}
+
+.animated-btn-ghost {
+  background: transparent;
+  color: var(--text);
+}
+
+.animated-btn-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.animated-btn.loading .animated-btn-text {
+  opacity: 0.5;
+}
+
+.animated-btn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  width: 20px;
+  height: 20px;
+  margin-left: -10px;
+  margin-top: -10px;
+  animation: ripple 0.6s ease-out;
+  pointer-events: none;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ========== CAMERA & SCANNER ========== */
+
+.camera-capture,
+.barcode-scanner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.camera-preview,
+.scanner-preview {
+  flex: 1;
+  position: relative;
+  background: black;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.camera-preview video,
+.scanner-preview video,
+.camera-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.camera-controls,
+.scanner-controls {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.camera-btn-capture {
+  width: 80px;
+  height: 80px;
+  background: white;
+  border: 4px solid var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.camera-btn-capture:active {
+  transform: scale(0.9);
+}
+
+.camera-shutter {
+  width: 64px;
+  height: 64px;
+  background: white;
+  border-radius: 50%;
+}
+
+.camera-btn-cancel,
+.camera-btn-retake,
+.camera-btn-use {
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.camera-btn-cancel {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.camera-btn-retake {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.camera-btn-use {
+  background: var(--accent);
+  color: #0b0e14;
+  border: none;
+}
+
+/* Scanner Overlay */
+.scanner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scanner-frame {
+  position: relative;
+  width: 280px;
+  height: 200px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  border-radius: 12px;
+}
+
+.scanner-corner {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border: 3px solid var(--accent);
+}
+
+.scanner-corner-tl {
+  top: -2px;
+  left: -2px;
+  border-right: none;
+  border-bottom: none;
+  border-radius: 12px 0 0 0;
+}
+
+.scanner-corner-tr {
+  top: -2px;
+  right: -2px;
+  border-left: none;
+  border-bottom: none;
+  border-radius: 0 12px 0 0;
+}
+
+.scanner-corner-bl {
+  bottom: -2px;
+  left: -2px;
+  border-right: none;
+  border-top: none;
+  border-radius: 0 0 0 12px;
+}
+
+.scanner-corner-br {
+  bottom: -2px;
+  right: -2px;
+  border-left: none;
+  border-top: none;
+  border-radius: 0 0 12px 0;
+}
+
+.scanner-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+  animation: scan 2s infinite linear;
+}
+
+@keyframes scan {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(200px);
+  }
+}
+
+.scanner-instructions {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.scanner-status {
+  color: var(--accent);
+  font-weight: 600;
+  margin-top: 8px;
+  animation: pulse 1.5s infinite;
+}
+
+/* ========== PULL TO REFRESH ========== */
+
+.pull-to-refresh-indicator {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.pull-to-refresh-spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid var(--accent);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+/* ========== CARD ANIMATIONS ========== */
+
+.card {
+  animation: fadeIn 0.3s ease;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:active {
+  transform: scale(0.99);
+}
+
+/* ========== SMOOTH SCROLLING ========== */
+
+* {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ========== iOS SAFE AREA ========== */
+
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .container {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .bottom-sheet {
+    padding-bottom: calc(24px + env(safe-area-inset-bottom));
+  }
+}
+
+/* ========== MICRO-INTERACTIONS ========== */
+
+button, .clickable {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+input, textarea {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Smooth focus states */
+input:focus,
+textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(124, 156, 255, 0.3);
+  transition: box-shadow 0.2s;
+}
+
+/* ========== PERFORMANCE OPTIMIZATIONS ========== */
+
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+img {
+  content-visibility: auto;
+}
+
+/* ========== DARK MODE ENHANCEMENTS ========== */
+
+@media (prefers-color-scheme: dark) {
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
